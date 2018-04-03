@@ -6,22 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/selectShuttleStop"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:text="Select a Shuttle Stop"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:textColor="Black"
-        tools:textColorHighlight="White"
-        tools:textSize="20sp" />
-
     <Button
         android:id="@+id/stop1Button"
         android:layout_width="299dp"
         android:layout_height="71dp"
-        android:text="85 Prescott Street"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="49dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="goToMap"
+        android:text="@string/prescottStreet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="54dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/selectShuttle"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/stop1Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
