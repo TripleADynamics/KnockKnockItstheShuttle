@@ -8,14 +8,12 @@
 
     <Button
         android:id="@+id/stop1Button"
-        android:layout_width="299dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="386dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="goToMap"
         android:text="@string/prescottStreet"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -23,15 +21,16 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginBottom="17dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="8dp"
         android:text="@string/selectShuttle"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/stop1Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 </android.support.constraint.ConstraintLayout>
