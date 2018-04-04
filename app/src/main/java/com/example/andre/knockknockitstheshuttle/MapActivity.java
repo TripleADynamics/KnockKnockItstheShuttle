@@ -94,4 +94,6 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         // (the camera animates to the user's current position).
         return false;
     }
+
 }
+
