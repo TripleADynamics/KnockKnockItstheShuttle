@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">KnockKnockItstheShuttle</string>
+    <string name="app_name">Knock, Knock! It\'s the Shuttle</string>
     <string name="title_activity_map">Map</string>
     <string name="selectShuttle">Select a Shuttle Stop:</string>
-    <string name="prescottStreet">85 PRESCOTT STREET</string>
+    <string name="prescottStreet">85 Prescott Street</string>
+    <string name="bartlettCenter">Bartlett Center</string>
+    <string name="faradayHall">Faraday Hall</string>
+    <string name="gatewayPark">Gateway Park</string>
+    <string name="salisburyEstates">Salisbury Estates</string>
+    <string name="wpiFacilityBuilding">WPI Main Facility Building</string>
 </resources>
