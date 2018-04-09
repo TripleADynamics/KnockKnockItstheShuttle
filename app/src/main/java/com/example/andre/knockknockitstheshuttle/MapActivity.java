@@ -16,6 +16,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 //import com.google.android.gms.maps.model.LatLng;
 //import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -28,6 +30,9 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Map Entry", "I have entered the onCreate Method");
         super.onCreate(savedInstanceState);
+        Bundle bundle= getIntent().getExtras();
+        double lat = bundle.getDouble("latitude");
+        double longitude = bundle.getDouble("longitude");
         setContentView(R.layout.activity_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -46,9 +51,12 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+    public void onMapReady(GoogleMap Mmap) {
         Log.d("Map Entry", "I have entered the onMapReady Method");
+        Mmap.addMarker(new MarkerOptions()
+                .position(new LatLng(42.27506, -71.799425))
+                .title("Hello world"));
+    }
         /* Sample Code, We may want to reference later.
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));

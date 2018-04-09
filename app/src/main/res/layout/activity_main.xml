@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:onClick="goToMap"
+        android:onClick="goToMapPrescott"
         android:text="@string/prescottStreet"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/stop2Button"
