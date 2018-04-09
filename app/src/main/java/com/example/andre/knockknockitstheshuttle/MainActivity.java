@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, MapActivity.class);
         Log.d("MainActivity", "Switching to Map Activity now.");
+
+        intent.putExtra("latitude", 50.432032);
+        intent.putExtra("longitude", 43.443211);
         startActivity(intent);
     }
 }

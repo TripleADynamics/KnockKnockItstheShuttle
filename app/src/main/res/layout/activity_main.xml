@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <Button
-        android:id="@+id/stop1Button"
+        android:id="@+id/prescottButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
@@ -18,14 +18,14 @@
         android:onClick="goToMap"
         android:text="@string/prescottStreet"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/stop2Button"
+        app:layout_constraintBottom_toTopOf="@+id/bartlettButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/stop2Button"
+        android:id="@+id/bartlettButton"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginBottom="8dp"
@@ -35,13 +35,13 @@
         android:onClick="goToMap"
         android:text="@string/bartlettCenter"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/gatewayButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stop1Button" />
+        app:layout_constraintTop_toBottomOf="@+id/prescottButton" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/gatewayButton"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginBottom="8dp"
@@ -51,13 +51,13 @@
         android:onClick="goToMap"
         android:text="@string/gatewayPark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/salisburyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stop2Button" />
+        app:layout_constraintTop_toBottomOf="@+id/bartlettButton" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/salisburyButton"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginBottom="8dp"
@@ -67,13 +67,13 @@
         android:onClick="goToMap"
         android:text="@string/salisburyEstates"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/wpiMainFacilityButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/gatewayButton" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/wpiMainFacilityButton"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginBottom="8dp"
@@ -83,10 +83,10 @@
         android:onClick="goToMap"
         android:text="@string/wpiFacilityBuilding"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintBottom_toTopOf="@+id/faradayHall"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/salisburyButton" />
 
     <TextView
         android:id="@+id/textView"
@@ -99,13 +99,13 @@
         android:text="@string/selectShuttle"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/stop1Button"
+        app:layout_constraintBottom_toTopOf="@+id/prescottButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/faradayHall"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginBottom="46dp"
@@ -118,5 +118,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/wpiMainFacilityButton" />
 </android.support.constraint.ConstraintLayout>
