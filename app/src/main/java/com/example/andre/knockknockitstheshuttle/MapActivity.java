@@ -45,7 +45,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
 
     // Calculates distance and time between two places
     public void distanceMatrix(double lat, double lng){
-        Log.d("mainActivity", "Entered distanceMatrix() method");
+        Log.d("distanceMatrix", "Entered distanceMatrix() method");
         // Defines the API key to use
         String API_KEY = "AIzaSyA0LTJc57HImR70w67fJDuw0S09kpu9DKU";
         //Provides context for the matrix
@@ -57,16 +57,18 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
         try{
             DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(context);
+            Log.d("distanceMatrix", "Method A worked");
             //Takes the approved request and turns it into an actual distance matrix using the users current lat and long,
             // and the recipient's address
             //Matrix takes user's origin as a lat and long value, while it takes the recipients location as a street address
             DistanceMatrix distanceMatrix = req.origins(lat + "," + lng).destinations(mMap.getMyLocation().getLatitude() + "," + mMap.getMyLocation().getLongitude()).await();
+            Log.d("distanceMatrix", "Method B worked");
             //Takes the duration given by distance matrix and writes it to the global variable finalEstimatedTime
             finalEstimatedTime = ((Long) distanceMatrix.rows[0].elements[0].duration.inSeconds).toString();
-            Log.d("mainActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
+            Log.d("mainActivity", "Method C worked. DistanceMatrix functions as desired. Final time: " + finalEstimatedTime);
         }
         catch(Exception e){
-            Log.d("mainActivity", "Catching things if they fail!");
+            Log.d("distanceMatrix", "DistanceMatrix failed!");
         }}
 
         /**
@@ -128,7 +130,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         else if(mapLocation==6){
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(FaradayHall,17));
         }
-
+        // Requests permission to access current location
         boolean check = checkLocationPermission();
         if(check==false){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
