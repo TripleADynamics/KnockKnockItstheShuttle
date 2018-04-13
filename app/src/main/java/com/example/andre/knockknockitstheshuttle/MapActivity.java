@@ -129,6 +129,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(FaradayHall,17));
         }
 
+        //Checks for GPS Location Permissions and then enables Phone Loction Tracking
         boolean check = checkLocationPermission();
         if(check==false){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
