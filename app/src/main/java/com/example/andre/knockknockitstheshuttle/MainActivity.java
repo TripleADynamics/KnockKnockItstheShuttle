@@ -68,12 +68,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("MapMove", x);
         startActivity(intent);
     }
-    public void goToMapPrescott(View v)
-    {
-        Intent intent = new Intent(this, MapActivity.class);
-        Log.d("MainActivity", "Switching to Map Activity now.");
-        intent.putExtra("latitude", 42.27506);
-        intent.putExtra("longitude", -71.799425);
-        startActivity(intent);
-    }
+
 }
