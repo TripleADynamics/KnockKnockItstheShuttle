@@ -74,8 +74,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         /**
          * Manipulates the map once available.
          * This callback is TRIGGERED when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera. In this case,
-         * we just add a marker near Sydney, Australia.
+         * This is where we can add markers or lines, add listeners or move the camera.
          * If Google Play services is not installed on the device, the user will be prompted to install
          * it inside the SupportMapFragment. This method will only be triggered once the user has
          * installed Google Play services and returned to the app.
@@ -112,7 +111,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         // 17 works well for our purposes but you can change these values.
         if(mapLocation==1) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Prescott, 17));
-            Log.d("mainActivity", "Calling distance matrix and passing it the lat and long of 85 Prescott St.");
+            Log.d("mapActivity", "Calling distance matrix and passing it the lat and long of 85 Prescott St.");
             distanceMatrix(Prescott.latitude,Prescott.longitude);
         }
         else if(mapLocation==2){
