@@ -18,6 +18,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
+                <!--To reset start activity, replace this line with the desired activity, and add the
+                current activity to the <activity> tags below. -->
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

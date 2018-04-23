@@ -12,5 +12,8 @@ import com.google.maps.DistanceMatrixApi;
 import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 
-public class DistanceMatrix {
+import com.google.maps.model.DistanceMatrix;
+
+public class TimeChecker {
+    // DistanceMatrix dm = ???;
 }
