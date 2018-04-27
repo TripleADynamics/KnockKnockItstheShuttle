@@ -3,6 +3,8 @@ package com.example.andre.knockknockitstheshuttle;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -36,6 +38,9 @@ import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DistanceMatrix;
 
+import java.io.IOException;
+import java.util.List;
+
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 public class MapActivity extends FragmentActivity implements OnMyLocationButtonClickListener,
@@ -49,8 +54,9 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
 
-    Marker shuttleLoc;
+    //Marker shuttleLoc;
     LatLng latLng;
+    List<Address>LocAddress;
 
 
     /*private static Context context;
@@ -235,6 +241,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //Send the new LatLng Value to Geocoder to convert to Address
+        getAddress(location);
         // You can now create a LatLng Object for use with maps
         //shuttleLoc.setPosition(latLng);
     }
@@ -264,5 +272,15 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                         e.printStackTrace();
                     }
                 });
+    }
+    public void getAddress(Location location){
+        Geocoder geocode = new Geocoder(this);
+        try {
+            LocAddress = geocode.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+            //Toast.makeText(this, LocAddress.get(0).toString(), Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("MapActivity", "getAddress died :<");
+        }
     }
 }
