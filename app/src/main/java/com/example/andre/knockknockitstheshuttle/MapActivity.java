@@ -44,11 +44,14 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     private GoogleMap mMap;
     int mapLocation = 0;
     String finalEstimatedTime = "";
-    String ShuttleStopAddress = "";
     private LocationRequest mLocationRequest;
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
+
+    Marker shuttleLoc;
+    LatLng latLng;
+
 
     /*private static Context context;
     public MapActivity(Context c)
@@ -123,7 +126,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
         // Requests permission to access current location
         boolean check = checkLocationPermission();
-        if (check == false) {
+        if (!check) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         mMap.setMyLocationEnabled(true);
@@ -213,7 +216,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         settingsClient.checkLocationSettings(locationSettingsRequest);
 
         boolean check = checkLocationPermission();
-        if (check == false) {
+        if (!check) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         // new Google API SDK v11 uses getFusedLocationProviderClient(this)
@@ -233,14 +236,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 Double.toString(location.getLongitude());
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         // You can now create a LatLng Object for use with maps
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Shuttle"));
+        //shuttleLoc.setPosition(latLng);
     }
     public void getLastLocation() {
         // Get last known recent location using new Google Play Services SDK (v11+)
         FusedLocationProviderClient locationClient = getFusedLocationProviderClient(this);
         boolean check = checkLocationPermission();
-        if (check == false) {
+        if (!check) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         locationClient.getLastLocation()
@@ -249,6 +251,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                     public void onSuccess(Location location) {
                         // GPS location can be null if GPS is switched off
                         if (location != null) {
+                            latLng= new LatLng(location.getLatitude(), location.getLongitude());
+                            //shuttleLoc = mMap.addMarker(new MarkerOptions().position(latLng).title("Shuttle"));
                             onLocationChanged(location);
                         }
                     }
