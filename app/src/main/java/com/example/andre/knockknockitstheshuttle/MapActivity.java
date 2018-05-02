@@ -57,7 +57,10 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     //Marker shuttleLoc;
     LatLng latLng;
     List<Address>LocAddress;
-
+    List<Address>myLocationAddressList;
+    List<Address>myDestinationAddressList;
+    Address myLocationAddress;
+    Address myDestinationAddress;
 
     /*private static Context context;
     public MapActivity(Context c)
@@ -119,6 +122,9 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         if (mapLocation == 1) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Prescott, 17));
             Log.d("mapActivity", "Calling distance matrix and passing it the lat and long of 85 Prescott St.");
+            // Sends Lat and Lng values to Geocoder to get an address.
+            myDestinationAddressList = getAddress(Prescott.latitude, Prescott.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);
         } else if (mapLocation == 2) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Bartlett, 17));
         } else if (mapLocation == 3) {
@@ -178,12 +184,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     }
 
     // Calculates distance and time between two places
-    public void distanceMatrix(double lat, double lng) {
-        Log.d("mainActivity", "Entered distanceMatrix() method");
+    public void distanceMatrix(String origin, String destination) {
+        Log.d("mapActivity", "Entered distanceMatrix() method");
         // Defines the API key to use
         String API_KEY = "AIzaSyA0LTJc57HImR70w67fJDuw0S09kpu9DKU";
         //Provides context for the matrix
         GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
+
         // If internet permission is not granted, ask for it
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(getBaseContext(), "This app needs internet permission to work", Toast.LENGTH_SHORT).show();
@@ -194,12 +201,15 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             //Takes the approved request and turns it into an actual distance matrix using the users current lat and long,
             // and the recipient's address
             //Matrix takes user's origin as a lat and long value, while it takes the recipients location as a street address
-            DistanceMatrix distanceMatrix = req.origins(mMap.getMyLocation().getLatitude() + "," + mMap.getMyLocation().getLongitude()).destinations(lat + "," + lng).await();
+            Log.d("mapActivity", "Called request");
+            //DistanceMatrix distanceMatrix = req.origins(42+","+ -71).destinations("85 Prescott St, Worcester, MA").await();
             //Takes the duration given by distance matrix and writes it to the global variable finalEstimatedTime
-            finalEstimatedTime = ((Long) distanceMatrix.rows[0].elements[0].duration.inSeconds).toString();
-            Log.d("mainActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
+            Log.d("mapActivity", "Distance Matrix Created");
+            //finalEstimatedTime = ((Long) distanceMatrix.rows[0].elements[0].duration.inSeconds).toString();
+            Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
         } catch (Exception e) {
-            Log.d("mainActivity", "Catching things if they fail!");
+            Log.d("mapActivity", "Catching things if they fail!");
+            e.printStackTrace();
         }
     }
     // Trigger new location updates at interval
@@ -242,7 +252,11 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 Double.toString(location.getLongitude());
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         //Send the new LatLng Value to Geocoder to convert to Address
-        getAddress(location);
+        myLocationAddressList = getAddress(location);
+        myLocationAddress = myLocationAddressList.get(0);
+        String destination = parseAddress(myDestinationAddress);
+        String origin = parseAddress(myLocationAddress);
+        distanceMatrix(origin, destination);
         // You can now create a LatLng Object for use with maps
         //shuttleLoc.setPosition(latLng);
     }
@@ -268,19 +282,40 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("MapDemoActivity", "Error trying to get last GPS location");
+                        Log.d("mapActivity", "Error trying to get last GPS location");
                         e.printStackTrace();
                     }
                 });
     }
-    public void getAddress(Location location){
+    public List getAddress(Location location){
         Geocoder geocode = new Geocoder(this);
         try {
             LocAddress = geocode.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-            //Toast.makeText(this, LocAddress.get(0).toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, LocAddress.get(0).toString(), Toast.LENGTH_SHORT).show();
+            return LocAddress;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d("MapActivity", "getAddress died :<");
+            Log.d("mapActivity", "getAddress died :<");
+            return null;
         }
+    }
+    public List getAddress(double lat, double lng){
+        Geocoder geocode = new Geocoder(this);
+        try {
+            LocAddress = geocode.getFromLocation(lat, lng,1);
+            Toast.makeText(this, LocAddress.get(0).toString(), Toast.LENGTH_SHORT).show();
+            return LocAddress;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("mapActivity", "getAddress died :<");
+            return null;
+        }
+    }
+    public String parseAddress(Address Address){
+        String addressString = "";
+        addressString += Address.getThoroughfare();
+        addressString += Address.getLocality();
+        addressString += Address.getAdminArea();
+        return addressString;
     }
 }
