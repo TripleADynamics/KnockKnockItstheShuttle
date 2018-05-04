@@ -54,15 +54,15 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     private LocationRequest mLocationRequest;
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
-    private long FASTEST_INTERVAL = 2000; /* 2 sec */
+    private long FASTEST_INTERVAL = 2 * 1000; /* 2 secs */
 
     //Marker shuttleLoc;
     LatLng latLng;
     List<Address>LocAddress;
     List<Address>myLocationAddressList;
-    List<Address>myDestinationAddressList;
+    //List<Address>myDestinationAddressList;
     Address myLocationAddress;
-    Address myDestinationAddress;
+    //Address myDestinationAddress;
     String origin;
     String destination;
 
@@ -90,7 +90,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
      * This callback is TRIGGERED when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * it inside the SupportMapFragment. This method will only be TRIGGERED once the user has
      * installed Google Play services and returned to the app.
      */
     @Override
@@ -118,6 +118,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         mMap.addMarker(new MarkerOptions().position(MainBuilding).title("WPI Main Facility Building"));
         LatLng FaradayHall = new LatLng(42.275159, -71.801032);
         mMap.addMarker(new MarkerOptions().position(FaradayHall).title("Faraday Hall"));
+        LatLng Boynton = new LatLng(42.274380, -71.805367);
+        mMap.addMarker(new MarkerOptions().position(Boynton).title("Boynton Street"));
 
         //Log.d("Map Activity", Integer.toString(mapLocation));
 
@@ -127,27 +129,39 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Prescott, 17));
             //Log.d("mapActivity", "Calling distance matrix and passing it the lat and long of 85 Prescott St.");
             // Sends Lat and Lng values to Geocoder to get an address.
-            myDestinationAddressList = getAddress(Prescott.latitude, Prescott.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);
+            /*myDestinationAddressList = getAddress(Prescott.latitude, Prescott.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "85 Prescott Street, Worcester, MA";
         } else if (mapLocation == 2) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Bartlett, 17));
-            myDestinationAddressList = getAddress(Bartlett.latitude, Bartlett.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);
+            /*myDestinationAddressList = getAddress(Bartlett.latitude, Bartlett.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "100 Institute Road, Worcester, MA";
         } else if (mapLocation == 3) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(GatewayPark, 17));
-            myDestinationAddressList = getAddress(GatewayPark.latitude, GatewayPark.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);
+            /*myDestinationAddressList = getAddress(GatewayPark.latitude, GatewayPark.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "60 Prescott Street, Worcester, MA";
         } else if (mapLocation == 4) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Salisbury, 17));
-            myDestinationAddressList = getAddress(Salisbury.latitude, Salisbury.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);
+            /*myDestinationAddressList = getAddress(Salisbury.latitude, Salisbury.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "Park Avenue, Worcester, MA";
         } else if (mapLocation == 5) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MainBuilding, 17));
-            myDestinationAddressList = getAddress(MainBuilding.latitude, MainBuilding.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);
+            /*DestinationAddressList = getAddress(MainBuilding.latitude, MainBuilding.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "37 Lee Street, Worcester, MA";
         } else if (mapLocation == 6) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(FaradayHall, 17));
-            myDestinationAddressList = getAddress(FaradayHall.latitude, FaradayHall.longitude);
+            /*myDestinationAddressList = getAddress(FaradayHall.latitude, FaradayHall.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "10 Faraday Street, Worcester, MA";
+        }
+        else if (mapLocation == 7)
+        {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Boynton, 17));
+            myDestinationAddressList = getAddress(Boynton.latitude, Boynton.longitude);
             myDestinationAddress = myDestinationAddressList.get(0);
         }
         // Requests permission to access current location
@@ -219,12 +233,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             DistanceMatrix distanceMatrix = req.origins(origin).destinations(destination).await();
             //Takes the duration given by distance matrix and writes it to the global variable finalEstimatedTime
             Log.d("mapActivity", "Distance Matrix Created");
-            finalEstimatedTime = ((Long) distanceMatrix.rows[0].elements[0].duration.inSeconds).toString();
+            finalEstimatedTime = (distanceMatrix.rows[0].elements[0].duration.humanReadable);
             Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
         } catch (Exception e) {
             Log.d("mapActivity", "Catching things if they fail!");
             e.printStackTrace();
         }
+
     }
     // Trigger new location updates at interval
     protected void startLocationUpdates() {
@@ -264,14 +279,15 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         //Send the new LatLng Value to Geocoder to convert to Address
         myLocationAddressList = getAddress(location);
         myLocationAddress = myLocationAddressList.get(0);
-        destination = parseAddress(myDestinationAddress);
+        //destination = parseAddress(myDestinationAddress);
         origin = parseAddress(myLocationAddress);
         Thread distThread = new Thread(new distanceThread());
         distThread.start();
+        Toast.makeText(this, "Estimated Time of Arrival to "+destination+": "+finalEstimatedTime, Toast.LENGTH_SHORT).show();
         // You can now create a LatLng Object for use with maps
         //shuttleLoc.setPosition(latLng);
     }
@@ -335,7 +351,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     }
     private class distanceThread implements Runnable{
         @Override
-        public void run(){
+        public void run()
+        {
             distanceMatrix(origin,destination);
         }
     }

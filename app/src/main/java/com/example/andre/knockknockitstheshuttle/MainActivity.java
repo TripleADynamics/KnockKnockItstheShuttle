@@ -68,5 +68,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("MapMove", x);
         startActivity(intent);
     }
+    public void goToMap6(View v) {
+        x=7;
+        Intent intent = new Intent(this, MapActivity.class);
+        Log.d("MainActivity", "Switching to Map Activity now.");
+        intent.putExtra("MapMove", x);
+        startActivity(intent);
+    }
 
 }
