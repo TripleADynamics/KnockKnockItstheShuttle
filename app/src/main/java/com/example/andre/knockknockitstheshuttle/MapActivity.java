@@ -88,7 +88,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
      * This callback is TRIGGERED when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * it inside the SupportMapFragment. This method will only be TRIGGERED once the user has
      * installed Google Play services and returned to the app.
      */
     @Override
@@ -116,6 +116,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         mMap.addMarker(new MarkerOptions().position(MainBuilding).title("WPI Main Facility Building"));
         LatLng FaradayHall = new LatLng(42.275159, -71.801032);
         mMap.addMarker(new MarkerOptions().position(FaradayHall).title("Faraday Hall"));
+        LatLng Boynton = new LatLng(42.274380, -71.805367);
+        mMap.addMarker(new MarkerOptions().position(Boynton).title("Boynton Street"));
 
         //Log.d("Map Activity", Integer.toString(mapLocation));
 
@@ -146,6 +148,12 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         } else if (mapLocation == 6) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(FaradayHall, 17));
             myDestinationAddressList = getAddress(FaradayHall.latitude, FaradayHall.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);
+        }
+        else if (mapLocation == 7)
+        {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Boynton, 17));
+            myDestinationAddressList = getAddress(Boynton.latitude, Boynton.longitude);
             myDestinationAddress = myDestinationAddressList.get(0);
         }
         // Requests permission to access current location
@@ -333,7 +341,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     }
     private class distanceThread implements Runnable{
         @Override
-        public void run(){
+        public void run()
+        {
             distanceMatrix(origin,destination);
         }
     }
