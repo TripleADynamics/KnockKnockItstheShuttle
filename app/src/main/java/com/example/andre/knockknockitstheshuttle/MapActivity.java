@@ -54,6 +54,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2 * 1000; /* 2 secs */
 
+
     //Marker shuttleLoc;
     LatLng latLng;
     List<Address>LocAddress;
@@ -159,8 +160,9 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         else if (mapLocation == 7)
         {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Boynton, 17));
-            myDestinationAddressList = getAddress(Boynton.latitude, Boynton.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);
+            /*myDestinationAddressList = getAddress(Boynton.latitude, Boynton.longitude);
+            myDestinationAddress = myDestinationAddressList.get(0);*/
+            destination = "27 Boynton Street, Worcester, MA";
         }
         // Requests permission to access current location
         boolean check = checkLocationPermission();
@@ -170,7 +172,6 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-        getLastLocation();
         startLocationUpdates();
     }
 
@@ -223,17 +224,18 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             ActivityCompat.requestPermissions((this), new String[]{Manifest.permission.INTERNET}, 1);
         }
         try {
-            DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(context);
-            //Takes the approved request and turns it into an actual distance matrix using the users current lat and long,
-            // and the recipient's address
-            //Matrix takes user's origin as a lat and long value, while it takes the recipients location as a street address
-            Log.d("mapActivity", "Called request");
-            DistanceMatrix distanceMatrix = req.origins(origin).destinations(destination).await();
-            //Takes the duration given by distance matrix and writes it to the global variable finalEstimatedTime
-            Log.d("mapActivity", "Distance Matrix Created");
-            finalEstimatedTime = (distanceMatrix.rows[0].elements[0].duration.humanReadable);
-            Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
-        } catch (Exception e) {
+                DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(context);
+                //Takes the approved request and turns it into an actual distance matrix using the users current lat and long,
+                // and the recipient's address
+                //Matrix takes user's origin as a lat and long value, while it takes the recipients location as a street address
+                Log.d("mapActivity", "Called request");
+                DistanceMatrix distanceMatrix = req.origins(origin).destinations(destination).await();
+                //Takes the duration given by distance matrix and writes it to the global variable finalEstimatedTime
+                Log.d("mapActivity", "Distance Matrix Created");
+                finalEstimatedTime = (distanceMatrix.rows[0].elements[0].duration.humanReadable);
+                Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
+            }
+        catch (Exception e) {
             Log.d("mapActivity", "Catching things if they fail!");
             e.printStackTrace();
         }
@@ -283,11 +285,15 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         myLocationAddress = myLocationAddressList.get(0);
         //destination = parseAddress(myDestinationAddress);
         origin = parseAddress(myLocationAddress);
+        Log.d("mapActivity", "Origin Address: "+origin);
         Thread distThread = new Thread(new distanceThread());
         distThread.start();
-        Toast.makeText(this, "Estimated Time of Arrival to "+destination+": "+finalEstimatedTime, Toast.LENGTH_SHORT).show();
-        // You can now create a LatLng Object for use with maps
-        //shuttleLoc.setPosition(latLng);
+        Log.d("mapActivity", "Final Estimated Time: " +finalEstimatedTime);
+        if(!finalEstimatedTime.equals("")) {
+            Toast.makeText(this, "Time until " + destination + ": " + finalEstimatedTime, Toast.LENGTH_SHORT).show();
+            // You can now create a LatLng Object for use with maps
+            //shuttleLoc.setPosition(latLng);
+        }
     }
     public void getLastLocation() {
         // Get last known recent location using new Google Play Services SDK (v11+)
@@ -328,7 +334,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             return null;
         }
     }
-    public List getAddress(double lat, double lng){
+    /*public List getAddress(double lat, double lng){
         Geocoder geocode = new Geocoder(this);
         try {
             LocAddress = geocode.getFromLocation(lat, lng,1);
@@ -339,7 +345,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             Log.d("mapActivity", "getAddress died :<");
             return null;
         }
-    }
+    }*/
     public String parseAddress(Address Address){
         String addressString = "";
         addressString += Address.getThoroughfare();
