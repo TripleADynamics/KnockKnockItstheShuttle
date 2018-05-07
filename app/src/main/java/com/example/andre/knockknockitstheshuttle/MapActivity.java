@@ -347,9 +347,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
     }*/
     public String parseAddress(Address Address){
-        String addressString = "";
+        String addressString;
+        addressString = Address.getSubThoroughfare();
+        addressString += " ";
         addressString += Address.getThoroughfare();
+        addressString += " ";
         addressString += Address.getLocality();
+        addressString += " ";
         addressString += Address.getAdminArea();
         return addressString;
     }
