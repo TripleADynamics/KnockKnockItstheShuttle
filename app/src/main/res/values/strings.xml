@@ -8,4 +8,6 @@
     <string name="gatewayPark">Gateway Park</string>
     <string name="salisburyEstates">Salisbury Estates</string>
     <string name="wpiFacilityBuilding">WPI Main Facility Building</string>
+    <string name="title_activity_sms">SMS</string>
+    <string name="title_activity_first_screen">FirstScreen</string>
 </resources>
