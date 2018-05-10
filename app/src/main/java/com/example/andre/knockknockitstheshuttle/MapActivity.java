@@ -87,30 +87,6 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         mapFragment.getMapAsync(this);
 
 
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d("Main Activity","Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Main Activity", "Failed to read value.", error.toException());
-            }
-        });
-
     }
 
 
@@ -268,6 +244,31 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 Log.d("mapActivity", "Distance Matrix Created");
                 finalEstimatedTime = (distanceMatrix.rows[0].elements[0].duration.humanReadable);
                 Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
+
+            // Write a message to the database
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference(finalEstimatedTime);
+
+            myRef.setValue(finalEstimatedTime);
+
+            // Read from the database
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    String value = dataSnapshot.getValue(String.class);
+                    Log.d("Main Activity","Value is: " + value);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("Main Activity", "Failed to read value.", error.toException());
+                }
+            });
+
+
             }
         catch (Exception e) {
             Log.d("mapActivity", "Catching things if they fail!");

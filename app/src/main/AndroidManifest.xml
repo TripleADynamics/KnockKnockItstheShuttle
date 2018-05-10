@@ -24,16 +24,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+            <!--
             <intent-filter>
 
-                <!--
+
                 To reset start activity, replace this line with the desired activity, and add the
                 current activity to the <activity> tags below.
-                -->
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -57,6 +60,25 @@
         <activity
             android:name=".FirstScreen"
             android:label="@string/title_activity_first_screen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+
+                <!--
+                To reset start activity, replace this line with the desired activity, and add the
+                current activity to the <activity> tags below.
+                -->
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FinalTime"
+            android:label="@string/title_activity_final_time"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

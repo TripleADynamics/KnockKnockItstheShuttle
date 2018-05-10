@@ -1,23 +1,18 @@
 package com.example.andre.knockknockitstheshuttle;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
-public class FirstScreen extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
 
-
-    int y= 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_screen);
+        setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -27,26 +22,6 @@ public class FirstScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
-        });
-    }
-    public void goToChoicesScreen(View v)
-    {
-        Button yourButton = (Button) findViewById(R.id.user);
-
-        yourButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startActivity(new Intent(FirstScreen.this, FinalTime.class));
-            }
-        });
-    }
-    public void driverScreen(View v)
-    {
-        Button yourButton = (Button) findViewById(R.id.driver);
-
-        yourButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startActivity(new Intent(FirstScreen.this, MainActivity.class));
             }
         });
     }
