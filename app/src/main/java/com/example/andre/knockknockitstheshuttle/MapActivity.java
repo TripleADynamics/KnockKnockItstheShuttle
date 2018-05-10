@@ -220,7 +220,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     }
 
     // Calculates distance and time between two places
-    public void distanceMatrix(String origin, String destination) {
+    public void distanceMatrix(String origin, final String destination) {
         Log.d("mapActivity", "Entered distanceMatrix() method");
         // Defines the API key to use
         String API_KEY = "AIzaSyA0LTJc57HImR70w67fJDuw0S09kpu9DKU";
@@ -246,18 +246,17 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
 
             // Write a message to the database
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference(finalEstimatedTime);
-
-            myRef.setValue(finalEstimatedTime);
+            DatabaseReference myRef = database.getReference("Shuttle Stops");
+            myRef.child(destination).setValue(finalEstimatedTime);
 
             // Read from the database
-            myRef.addValueEventListener(new ValueEventListener() {
+            /*myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
-                    String value = dataSnapshot.getValue(String.class);
-                    Log.d("Main Activity","Value is: " + value);
+                    String value = dataSnapshot.child(destination).getValue(String.class);
+                    Log.d("mapActivity","Value is: " + value);
                 }
 
                 @Override
@@ -265,9 +264,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                     // Failed to read value
                     Log.w("Main Activity", "Failed to read value.", error.toException());
                 }
-            });
-
-
+            });*/
             }
         catch (Exception e) {
             Log.d("mapActivity", "Catching things if they fail!");

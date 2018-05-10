@@ -23,16 +23,14 @@ public class FinalTime extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_time);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
                 // Read from the database
-                DatabaseReference myRef =FirebaseDatabase.getInstance().getReference();
+                DatabaseReference myRef =FirebaseDatabase.getInstance().getReference("Shuttle Stops");
                 FirebaseApp.initializeApp(this);
                 final Controller aController= (Controller) getApplicationContext();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                myRef= database.getReference("Time");
+                myRef= database.getReference("Shuttle Stops");
 
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -41,8 +39,6 @@ public class FinalTime extends AppCompatActivity {
 
                         for(DataSnapshot timesnapshot: dataSnapshot.getChildren()){
                             FinalTime t = timesnapshot.getValue(FinalTime.class);
-
-
 
                         }
                         // This method is called once with the initial value and again
@@ -53,8 +49,8 @@ public class FinalTime extends AppCompatActivity {
 
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("Main Activity","Value is: " + value);
-                        TextView FinalTimeText= findViewById(R.id.FinalTimeText);
-                        FinalTimeText.setText("FInal times"+ value);
+                        //TextView FinalTimeText= findViewById(R.id.FinalTimeText);
+                        //FinalTimeText.setText("FInal times"+ value);
                     }
 
 
