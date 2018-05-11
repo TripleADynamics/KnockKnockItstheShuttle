@@ -248,9 +248,26 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Shuttle Stops");
             if(destination.equals("85 Prescott Street, Worcester, MA")) {
-                myRef.child("loc6").setValue(destination+": "+finalEstimatedTime);
+                myRef.child("Loc1").setValue(destination+": "+finalEstimatedTime);
             }
-            
+            if(destination.equals("100 Institute Road, Worcester, MA")) {
+                myRef.child("Loc2").setValue(destination+": "+finalEstimatedTime);
+            }
+            if(destination.equals("60 Prescott Street, Worcester, MA")) {
+                myRef.child("Loc3").setValue(destination+": "+finalEstimatedTime);
+            }
+            if(destination.equals("Park Avenue, Worcester, MA")) {
+                myRef.child("Loc4").setValue(destination+": "+finalEstimatedTime);
+            }
+            if(destination.equals("37 Lee Street, Worcester, MA")) {
+                myRef.child("Loc5").setValue(destination+": "+finalEstimatedTime);
+            }
+            if(destination.equals("10 Faraday Street, Worcester, MA")) {
+                myRef.child("Loc6").setValue(destination+": "+finalEstimatedTime);
+            }
+            if(destination.equals("27 Boynton Street, Worcester, MA")) {
+                myRef.child("Loc7").setValue(destination+": "+finalEstimatedTime);
+            }
             // Read from the database
             /*myRef.addValueEventListener(new ValueEventListener() {
                 @Override

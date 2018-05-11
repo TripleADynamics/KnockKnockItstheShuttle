@@ -104,8 +104,10 @@ public class FinalTime extends AppCompatActivity {
             }
 
     private void showData(DataSnapshot dataSnapshot) {
+        TimeChecker t;
         for(DataSnapshot timesnapshot: dataSnapshot.getChildren()){
-            TimeChecker t = new TimeChecker();
+            t = timesnapshot.getValue(TimeChecker.class);
+
             t.setLoc1(timesnapshot.getValue(TimeChecker.class).getLoc1());
             t.setLoc2(timesnapshot.getValue(TimeChecker.class).getLoc2());
             t.setLoc3(timesnapshot.getValue(TimeChecker.class).getLoc3());
@@ -113,12 +115,17 @@ public class FinalTime extends AppCompatActivity {
             t.setLoc5(timesnapshot.getValue(TimeChecker.class).getLoc5());
             t.setLoc6(timesnapshot.getValue(TimeChecker.class).getLoc6());
             t.setLoc7(timesnapshot.getValue(TimeChecker.class).getLoc7());
-            //String EstTime = dataSnapshot.getValue(String.class);
-            //ShuttleTimes.add(EstTime);
+
+            ShuttleTimes.add(t.getLoc1());
+            ShuttleTimes.add(t.getLoc2());
+            ShuttleTimes.add(t.getLoc3());
+            ShuttleTimes.add(t.getLoc4());
+            ShuttleTimes.add(t.getLoc5());
+            ShuttleTimes.add(t.getLoc6());
+            ShuttleTimes.add(t.getLoc7());
             arrayAdapter.notifyDataSetChanged();
-            //String time = timesnapshot.getValue(String.class);
-            //Log.d("FinalTime", time);
         }
+
     }
 
 }

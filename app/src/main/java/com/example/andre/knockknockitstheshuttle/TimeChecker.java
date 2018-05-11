@@ -17,13 +17,14 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.model.DistanceMatrix;
 
 public class TimeChecker {
-    private String Loc1;
-    private String Loc2;
-    private String Loc3;
-    private String Loc4;
-    private String Loc5;
-    private String Loc6;
-    private String Loc7;
+    private String Loc1; // 85 Prescott St.
+    private String Loc2; // 100 Institude Road
+    private String Loc3; // 60 Prescott St.
+    private String Loc4; // Park Avenue
+    private String Loc5; // 37 Lee St.
+    private String Loc6; // 10 Faraday St.
+    private String Loc7; // 27 Boynton St.
+    private String Location;
 
     public TimeChecker(){
 
@@ -84,4 +85,5 @@ public class TimeChecker {
     public void setLoc7(String loc7) {
         Loc7 = loc7;
     }
+
 }
