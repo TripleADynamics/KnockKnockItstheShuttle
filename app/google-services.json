@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "446204210648-k6geec0jhec8c6kjt1b6oi607l45ergo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.andre.knockknockitstheshuttle",
+            "certificate_hash": "b2d4b579446eb4ef311b1706d3c50f0dddccd2c7"
+          }
+        },
+        {
           "client_id": "446204210648-adav2bugda8utq9d8626snvv772mpacg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -28,6 +36,50 @@
           "android_info": {
             "package_name": "com.example.andre.knockknockitstheshuttle",
             "certificate_hash": "1a8c1d32b1c80a6e0670ed33e6f1e0874e97e7f6"
+          }
+        },
+        {
+          "client_id": "446204210648-02mdnhg21dsfv4pka7curuv23k00if71.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8VYGWTfIAokokokixdutfxbk4aLmf12M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446204210648-02mdnhg21dsfv4pka7curuv23k00if71.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446204210648:android:9816bfff7caec8e8",
+        "android_client_info": {
+          "package_name": "com.example.kopyr.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446204210648-dfsndmpb3m58nm4vm0jhln421v7fpa0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kopyr.firebase",
+            "certificate_hash": "f90fd15fc294a0b341c4cf004653b5dd18167b6f"
           }
         },
         {
