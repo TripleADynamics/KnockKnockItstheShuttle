@@ -247,8 +247,10 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             // Write a message to the database
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Shuttle Stops");
-            myRef.child(destination).setValue(finalEstimatedTime);
-
+            if(destination.equals("85 Prescott Street, Worcester, MA")) {
+                myRef.child("loc6").setValue(destination+": "+finalEstimatedTime);
+            }
+            
             // Read from the database
             /*myRef.addValueEventListener(new ValueEventListener() {
                 @Override
