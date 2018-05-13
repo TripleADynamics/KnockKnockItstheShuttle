@@ -8,8 +8,15 @@
     <string name="gatewayPark">Gateway Park</string>
     <string name="salisburyEstates">Salisbury Estates</string>
     <string name="wpiFacilityBuilding">WPI Main Facility Building</string>
+    <string name="boyntonStreet">Boynton Street</string>
     <string name="title_activity_sms">SMS</string>
     <string name="title_activity_first_screen">FirstScreen</string>
     <string name="title_activity_final_time">FinalTime</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="knock_knock">Knock Knock!</string>
+    <string name="its_the_shuttle">It\'s the Shuttle</string>
+    <string name="I_am_a">I am a...</string>
+    <string name="shuttle_user">Shuttle User</string>
+    <string name="driver">Driver</string>
+    <string name="icon_alt_text">Shuttle icon</string>
 </resources>
