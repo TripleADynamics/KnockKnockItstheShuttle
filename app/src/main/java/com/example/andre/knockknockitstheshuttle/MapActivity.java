@@ -223,7 +223,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     public void distanceMatrix(String origin, final String destination) {
         Log.d("mapActivity", "Entered distanceMatrix() method");
         // Defines the API key to use
-        String API_KEY = "AIzaSyA0LTJc57HImR70w67fJDuw0S09kpu9DKU";
+        String API_KEY = getString(R.string.google_maps_key);
+        //Log.d("mapActivity", "API KEY STRING: "+API_KEY);
         //Provides context for the matrix
         GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
 
