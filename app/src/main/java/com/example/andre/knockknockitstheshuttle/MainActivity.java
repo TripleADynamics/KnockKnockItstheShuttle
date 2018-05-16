@@ -1,4 +1,7 @@
 package com.example.andre.knockknockitstheshuttle;
+//This is the code for the screen with all of the shuttle stops as options for which locations to update
+//https://developers.google.com/maps/documentation/javascript/interaction
+//https://developers.google.com/places/android-sdk/intro
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

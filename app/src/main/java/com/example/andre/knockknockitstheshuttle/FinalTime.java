@@ -1,4 +1,9 @@
 package com.example.andre.knockknockitstheshuttle;
+/**
+ * methods learned from https://www.tutorialspoint.com/firebase/firebase_read_data.htm
+ * This class retrieves the data for the times from firebase and displays it
+ */
+
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -102,9 +107,10 @@ public class FinalTime extends AppCompatActivity {
                 });
 
             }
-
+//Retrieves the data from firebase and displays it onto a user interface
     private void showData(DataSnapshot dataSnapshot) {
         TimeChecker t;
+        ShuttleTimes.clear();
         for(DataSnapshot timesnapshot: dataSnapshot.getChildren()){
             t = timesnapshot.getValue(TimeChecker.class);
 

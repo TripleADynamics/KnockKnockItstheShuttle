@@ -13,7 +13,8 @@ public class Controller extends Application {
     public void setData(FinalTime time){
         this.time = time;
     }
-    public FinalTime getData(){
+    public FinalTime getData()
+    {
         return time;
     }
 }

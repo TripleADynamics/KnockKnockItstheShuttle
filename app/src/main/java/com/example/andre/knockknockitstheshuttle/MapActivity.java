@@ -1,4 +1,7 @@
 package com.example.andre.knockknockitstheshuttle;
+// Used documentation from https://firebase.google.com/docs/database/android/start/
+//https://developers.google.com/maps/documentation/distance-matrix/intro
+//https://developers.google.com/maps/documentation/distance-matrix/intro
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -57,7 +60,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     String finalEstimatedTime = "";
     private LocationRequest mLocationRequest;
 
-    private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
+    private long UPDATE_INTERVAL = 20 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2 * 1000; /* 2 secs */
 
     //Marker shuttleLoc;
@@ -253,7 +256,8 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 finalEstimatedTime = (distanceMatrix.rows[0].elements[0].duration.humanReadable);
                 Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
 
-            // Write a message to the database
+            // Write a message to the database that sets the values in the database to the times
+            // of each respective shuttle stop
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Shuttle Stops");
             if(destination.equals("85 Prescott Street, Worcester, MA")) {
@@ -300,7 +304,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
 
     }
-    // Trigger new location updates at interval
+    // Trigger new location updates at interval, which was set as a certain value when the variable was declared
     protected void startLocationUpdates() {
 
         // Create the location request to start receiving updates
@@ -381,6 +385,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                     }
                 });
     }
+    //gets the address from the given lat and long coordinates to be used in the distance matrix
     public List getAddress(Location location){
         Geocoder geocode = new Geocoder(this);
         try {

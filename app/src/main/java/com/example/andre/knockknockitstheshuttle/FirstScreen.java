@@ -1,4 +1,5 @@
 package com.example.andre.knockknockitstheshuttle;
+//This screen gives the user the choice to be either a user or a driver
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ public class FirstScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
     }
+    //This method directs the user to the screen where the estimated times to the shuttle are all displayed
     public void goToChoicesScreen(View v)
     {
         Button yourButton = (Button) findViewById(R.id.user);
@@ -26,6 +28,7 @@ public class FirstScreen extends AppCompatActivity {
             }
         });
     }
+    //This method directs the user to the screen where the driver can update their location
     public void driverScreen(View v)
     {
         Button yourButton = (Button) findViewById(R.id.driver);

@@ -1,20 +1,7 @@
 package com.example.andre.knockknockitstheshuttle;
-
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.maps.DistanceMatrixApi;
-import com.google.maps.DistanceMatrixApiRequest;
-import com.google.maps.GeoApiContext;
-
-import com.google.maps.model.DistanceMatrix;
+/**
+ * This method gets all of the locations of the shuttles
+ */
 
 public class TimeChecker {
     private String Loc1; // 85 Prescott St.
@@ -25,10 +12,16 @@ public class TimeChecker {
     private String Loc6; // 10 Faraday St.
     private String Loc7; // 27 Boynton St.
     private String Location;
-
+//
     public TimeChecker(){
 
     }
+
+    /**
+     * These are all getters and setters
+     * @getLoc gets the shuttle stop's child location in firebase
+     * @returnLoc returns the location from firebase
+     */
 
     public String getLoc1() {
         return Loc1;
