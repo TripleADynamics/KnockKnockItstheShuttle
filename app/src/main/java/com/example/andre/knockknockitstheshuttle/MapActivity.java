@@ -246,37 +246,43 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 finalEstimatedTime = (distanceMatrix.rows[0].elements[0].duration.humanReadable);
                 Log.d("mapActivity", "distanceMatrix functions as desired. Final time: " + finalEstimatedTime);
 
-            // Write a message to the database that sets the values in the database to the times
-            // of each respective shuttle stop
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Shuttle Stops");
-            if(destination.equals("85 Prescott Street, Worcester, MA")) {
-                myRef.child("Loc1").setValue(StopName+": "+finalEstimatedTime);
-            }
-            if(destination.equals("100 Institute Road, Worcester, MA")) {
-                myRef.child("Loc2").setValue(StopName+": "+finalEstimatedTime);
-            }
-            if(destination.equals("60 Prescott Street, Worcester, MA")) {
-                myRef.child("Loc3").setValue(StopName+": "+finalEstimatedTime);
-            }
-            if(destination.equals("Park Avenue, Worcester, MA")) {
-                myRef.child("Loc4").setValue(StopName+": "+finalEstimatedTime);
-            }
-            if(destination.equals("37 Lee Street, Worcester, MA")) {
-                myRef.child("Loc5").setValue(StopName+": "+finalEstimatedTime);
-            }
-            if(destination.equals("10 Faraday Street, Worcester, MA")) {
-                myRef.child("Loc6").setValue(StopName+": "+finalEstimatedTime);
-            }
-            if(destination.equals("27 Boynton Street, Worcester, MA")) {
-                myRef.child("Loc7").setValue(StopName+": "+finalEstimatedTime);
-            }
+                addToFirebase();
             }
         catch (Exception e) {
             Log.d("mapActivity", "Catching things if they fail!");
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Writes a message to the database that sets the values in the database to the times
+     * of each respective shuttle stop
+     */
+    private void addToFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Shuttle Stops");
+        if(destination.equals("85 Prescott Street, Worcester, MA")) {
+            myRef.child("Loc1").setValue(StopName+": "+finalEstimatedTime);
+        }
+        if(destination.equals("100 Institute Road, Worcester, MA")) {
+            myRef.child("Loc2").setValue(StopName+": "+finalEstimatedTime);
+        }
+        if(destination.equals("60 Prescott Street, Worcester, MA")) {
+            myRef.child("Loc3").setValue(StopName+": "+finalEstimatedTime);
+        }
+        if(destination.equals("Park Avenue, Worcester, MA")) {
+            myRef.child("Loc4").setValue(StopName+": "+finalEstimatedTime);
+        }
+        if(destination.equals("37 Lee Street, Worcester, MA")) {
+            myRef.child("Loc5").setValue(StopName+": "+finalEstimatedTime);
+        }
+        if(destination.equals("10 Faraday Street, Worcester, MA")) {
+            myRef.child("Loc6").setValue(StopName+": "+finalEstimatedTime);
+        }
+        if(destination.equals("27 Boynton Street, Worcester, MA")) {
+            myRef.child("Loc7").setValue(StopName+": "+finalEstimatedTime);
+        }
     }
 
     /**
