@@ -7,18 +7,10 @@ package com.example.andre.knockknockitstheshuttle;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,8 +33,6 @@ public class FinalTime extends AppCompatActivity {
         setContentView(R.layout.activity_final_time);
 
                 // Read from the database
-                //FirebaseApp.initializeApp(this);
-                //final Controller aController= (Controller) getApplicationContext();
                 database = FirebaseDatabase.getInstance();
                 myRef = database.getReference();
                 arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ShuttleTimes);
@@ -57,14 +47,6 @@ public class FinalTime extends AppCompatActivity {
                 showData(dataSnapshot);
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-
-
-
-
-                //String value = dataSnapshot.getValue(String.class);
-                //Log.d("FinalTime","Value is: " + value);
-                //TextView FinalTimeText= findViewById(R.id.FinalTimeText);
-                //FinalTimeText.setText("FInal times"+ value);
             }
 
 
@@ -76,38 +58,7 @@ public class FinalTime extends AppCompatActivity {
 
 
         });
-
-                myRef.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        /*Log.d("FinalTime", "Entered OnChildAddedListener");
-                        String EstTime = dataSnapshot.getValue(String.class);
-                        ShuttleTimes.add(EstTime);
-                        arrayAdapter.notifyDataSetChanged();*/
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
+    }
 //Retrieves the data from firebase and displays it onto a user interface
     private void showData(DataSnapshot dataSnapshot) {
         TimeChecker t;

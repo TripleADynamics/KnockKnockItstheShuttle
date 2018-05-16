@@ -92,11 +92,6 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
 
     }
 
-
-    /*public static void showToastMethod() {
-        Toast.makeText(context, "mymessage ", Toast.LENGTH_SHORT).show();
-    }*/
-
     /**
      * Manipulates the map once available.
      * This callback is TRIGGERED when the map is ready to be used.
@@ -141,46 +136,32 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Prescott, 17));
             //Log.d("mapActivity", "Calling distance matrix and passing it the lat and long of 85 Prescott St.");
             // Sends Lat and Lng values to Geocoder to get an address.
-            /*myDestinationAddressList = getAddress(Prescott.latitude, Prescott.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "85 Prescott Street, Worcester, MA";
             StopName = "85 Prescott Street";
         } else if (mapLocation == 2) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Bartlett, 17));
-            /*myDestinationAddressList = getAddress(Bartlett.latitude, Bartlett.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "100 Institute Road, Worcester, MA";
             StopName = "Bartlett Center";
         } else if (mapLocation == 3) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(GatewayPark, 17));
-            /*myDestinationAddressList = getAddress(GatewayPark.latitude, GatewayPark.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "60 Prescott Street, Worcester, MA";
             StopName = "Gateway Park";
         } else if (mapLocation == 4) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Salisbury, 17));
-            /*myDestinationAddressList = getAddress(Salisbury.latitude, Salisbury.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "Park Avenue, Worcester, MA";
             StopName = "Salisbury Estates";
         } else if (mapLocation == 5) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MainBuilding, 17));
-            /*DestinationAddressList = getAddress(MainBuilding.latitude, MainBuilding.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "37 Lee Street, Worcester, MA";
             StopName = "WPI Main Facility Building";
         } else if (mapLocation == 6) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(FaradayHall, 17));
-            /*myDestinationAddressList = getAddress(FaradayHall.latitude, FaradayHall.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "10 Faraday Street, Worcester, MA";
             StopName = "Faraday Hall";
         }
         else if (mapLocation == 7)
         {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Boynton, 17));
-            /*myDestinationAddressList = getAddress(Boynton.latitude, Boynton.longitude);
-            myDestinationAddress = myDestinationAddressList.get(0);*/
             destination = "27 Boynton Street, Worcester, MA";
             StopName = "Boynton Street";
         }
@@ -281,22 +262,6 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             if(destination.equals("27 Boynton Street, Worcester, MA")) {
                 myRef.child("Loc7").setValue(StopName+": "+finalEstimatedTime);
             }
-            // Read from the database
-            /*myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    String value = dataSnapshot.child(destination).getValue(String.class);
-                    Log.d("mapActivity","Value is: " + value);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w("Main Activity", "Failed to read value.", error.toException());
-                }
-            });*/
             }
         catch (Exception e) {
             Log.d("mapActivity", "Catching things if they fail!");
@@ -346,16 +311,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         //Send the new LatLng Value to Geocoder to convert to Address
         myLocationAddressList = getAddress(location);
         myLocationAddress = myLocationAddressList.get(0);
-        //destination = parseAddress(myDestinationAddress);
         origin = parseAddress(myLocationAddress);
         Log.d("mapActivity", "Origin Address: "+origin);
         Thread distThread = new Thread(new distanceThread());
         distThread.start();
         Log.d("mapActivity", "Final Estimated Time: " +finalEstimatedTime);
         if(!finalEstimatedTime.equals("")) {
-            Toast.makeText(this, "Time until " + destination + ": " + finalEstimatedTime, Toast.LENGTH_SHORT).show();
-            // You can now create a LatLng Object for use with maps
-            //shuttleLoc.setPosition(latLng);
+            Toast.makeText(this, "Time until " + destination + ": " + finalEstimatedTime, Toast.LENGTH_SHORT).show();;
         }
     }
     public void getLastLocation() {
@@ -398,18 +360,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             return null;
         }
     }
-    /*public List getAddress(double lat, double lng){
-        Geocoder geocode = new Geocoder(this);
-        try {
-            LocAddress = geocode.getFromLocation(lat, lng,1);
-            //Toast.makeText(this, LocAddress.get(0).toString(), Toast.LENGTH_SHORT).show();
-            return LocAddress;
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("mapActivity", "getAddress died :<");
-            return null;
-        }
-    }*/
+
     public String parseAddress(Address Address){
         String addressString;
         addressString = Address.getSubThoroughfare();
