@@ -18,15 +18,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
     }
-    // Multiple of the same goToMap method for all the different buttons. Methods correspond
-    // in the same order as the xml structure.So 85 Prescott St is goToMap and Faraday Hall is
-    // goToMap 5. The x variable is a holder to essentially listen for what button was pressed.
-    // This variable is placed into the Intent to be extracted in the Map Activity so that it can
-    // go to the proper location
+
+    /**
+     *  Multiple of the same goToMap method for all the different buttons. Methods correspond
+     *  in the same order as the xml structure.So 85 Prescott St is goToMap and Faraday Hall is
+     *  goToMap 5. The x variable is a holder to essentially listen for what button was pressed.
+     *  This variable is placed into the Intent to be extracted in the Map Activity so that it can
+     *  go to the proper location
+     * @param v maps button click to goToMap functions
+     */
     public void goToMap(View v)
     {
         x=1;

@@ -40,26 +40,29 @@ public class FinalTime extends AppCompatActivity {
                 myListView.setAdapter(arrayAdapter);
                 Log.d("FinalTime", "In FinalTime.java file");
 
+        // This method is called once with the initial value and again
+        // whenever data at this location is updated.
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("FinalTime", "Entered onDataChangeMethod");
                 showData(dataSnapshot);
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
             }
 
-
+        // Failed to read value
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w("FinalTime", "Failed to read value.", error.toException());
             }
 
 
         });
     }
-//Retrieves the data from firebase and displays it onto a user interface
+
+    /**
+     * Retrieves the data from firebase and displays it into a user interface
+     * @param dataSnapshot Firebase Snapshot of the data contained in the database
+     */
     private void showData(DataSnapshot dataSnapshot) {
         TimeChecker t;
         ShuttleTimes.clear();

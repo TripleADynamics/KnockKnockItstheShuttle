@@ -67,18 +67,11 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
     LatLng latLng;
     List<Address>LocAddress;
     List<Address>myLocationAddressList;
-    //List<Address>myDestinationAddressList;
     Address myLocationAddress;
-    //Address myDestinationAddress;
     String origin;
     String destination;
     String StopName;
 
-    /*private static Context context;
-    public MapActivity(Context c)
-    {
-        context=c;
-    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Map Entry", "I have entered the onCreate Method");
@@ -176,12 +169,17 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         startLocationUpdates();
     }
 
+    /**
+     * Checks App Location Permissions for GPS
+     * @return True if location permissions are enabled. False is not.
+     */
     public boolean checkLocationPermission() {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = this.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
 
+    // Gets the results of the permissions
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 1: {
@@ -198,20 +196,31 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
     }
 
+    /**
+     * Map button that shows the location of the user
+     * @param location Android Location Object, used for its latitude and longitude values
+     */
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Map button function that brings refocuses map on user location
+     * @return false so that we don't consume the event and the default behavior still occurs
+     * (The camera animates to the user's current position)
+     */
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "Going to your location.", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
         return false;
     }
 
-    // Calculates distance and time between two places
+    /**
+     * Calculates the time between two places
+     * @param origin the current address of the shuttle
+     * @param destination the destination of the shuttle
+     */
     public void distanceMatrix(String origin, final String destination) {
         Log.d("mapActivity", "Entered distanceMatrix() method");
         // Defines the API key to use
@@ -269,7 +278,10 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
 
     }
-    // Trigger new location updates at interval, which was set as a certain value when the variable was declared
+
+    /**
+     * Trigger new location updates at an interval defined by Update_Interval and Fastest_Interval
+     */
     protected void startLocationUpdates() {
 
         // Create the location request to start receiving updates
@@ -302,6 +314,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                 },
                 Looper.myLooper());
     }
+
+    /**
+     * Method that runs when the location is changed
+     * onLcoationChanged geocodes location into an address that the distanceMatrix method uses
+     * onLocationChanged also accesses the distanceMatrix method
+     * @param location Android location object that contains longitude and latitude values
+     */
     public void onLocationChanged(Location location) {
         // New location has now been determined
         String msg = "Updated Location: " +
@@ -320,6 +339,10 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
             Toast.makeText(this, "Time until " + destination + ": " + finalEstimatedTime, Toast.LENGTH_SHORT).show();;
         }
     }
+
+    /**
+     * Gets last lccation known by the device
+     */
     public void getLastLocation() {
         // Get last known recent location using new Google Play Services SDK (v11+)
         FusedLocationProviderClient locationClient = getFusedLocationProviderClient(this);
@@ -329,17 +352,18 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
         locationClient.getLastLocation()
                 .addOnSuccessListener(new OnSuccessListener<Location>() {
+                    // Create a latlng value if getLastLocation Method is successful
                     @Override
                     public void onSuccess(Location location) {
                         // GPS location can be null if GPS is switched off
                         if (location != null) {
                             latLng= new LatLng(location.getLatitude(), location.getLongitude());
-                            //shuttleLoc = mMap.addMarker(new MarkerOptions().position(latLng).title("Shuttle"));
                             onLocationChanged(location);
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
+                    // Occurs if getLastLocation is unsuccessful
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("mapActivity", "Error trying to get last GPS location");
@@ -347,6 +371,13 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
                     }
                 });
     }
+
+    /**
+     * Gets the address from the given lat and long coordinates to be used in the distance matrix
+     * @param location Android location object that contains longitude and latitude values
+     * @return Geocoded location address.
+     * @return null if IOException
+     */
     //gets the address from the given lat and long coordinates to be used in the distance matrix
     public List getAddress(Location location){
         Geocoder geocode = new Geocoder(this);
@@ -361,6 +392,11 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         }
     }
 
+    /**
+     * Address Parser Class
+     * @param Address Geocoded Address
+     * @return a string that has a detailed address that the distance matrix uses
+     */
     public String parseAddress(Address Address){
         String addressString;
         addressString = Address.getSubThoroughfare();
@@ -372,6 +408,10 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         addressString += Address.getAdminArea();
         return addressString;
     }
+
+    /**
+     * Second thread to deal with distanceMatrix requests
+     */
     private class distanceThread implements Runnable{
         @Override
         public void run()
