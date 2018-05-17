@@ -202,7 +202,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
      */
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+       /* Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();*/
     }
 
     /**
@@ -342,7 +342,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
         distThread.start();
         Log.d("mapActivity", "Final Estimated Time: " +finalEstimatedTime);
         if(!finalEstimatedTime.equals("")) {
-            Toast.makeText(this, "Time until " + destination + ": " + finalEstimatedTime, Toast.LENGTH_SHORT).show();;
+           /* Toast.makeText(this, "Time until " + destination + ": " + finalEstimatedTime, Toast.LENGTH_SHORT).show();;*/
         }
     }
 
