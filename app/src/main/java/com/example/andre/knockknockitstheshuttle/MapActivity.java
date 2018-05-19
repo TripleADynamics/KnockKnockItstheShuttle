@@ -62,7 +62,7 @@ public class MapActivity extends FragmentActivity implements OnMyLocationButtonC
 
     private long UPDATE_INTERVAL = 20 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2 * 1000; /* 2 secs */
-    
+
     LatLng latLng;
     List<Address>LocAddress;
     List<Address>myLocationAddressList;
